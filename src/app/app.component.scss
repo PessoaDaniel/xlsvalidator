@@ -1,0 +1,68 @@
+header {
+  background: #108248;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  padding-top: 10%;
+  flex-direction: column;
+
+  section {
+    color: #ffffff;
+    font-weight: bolder;
+    i {
+      font-size: 50px;
+    }
+    span.brand-text {
+      font-size: 30px;
+    }
+  }
+}
+.tutorial {
+  margin-top: 20px;
+  background-color: #084b28;
+  width:  20%;
+  display: flex;
+  justify-content: center;
+  padding: 10px 20px;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 7px;
+}
+.tuturial-step {
+  margin: 4px 0;
+  text-align: left;
+  width: 100%;
+  .step-number {
+    background: #ffffff;
+    color: #084b28;
+    padding: 5px;
+    clip-path: circle(35%);
+
+  }
+}
+
+nav {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-top: 8px;
+  font-size: 20px;
+  border-bottom: 2px solid #cccccc;
+  cursor: pointer;
+}
+.nav-item {
+  text-align: center;
+  padding: 0 10px;
+  width: calc(100%/3);
+
+
+}
+.nav-item:hover {
+  color: #108248;
+
+}
+.nav-item.active {
+  color: #108248;
+  border-bottom: 4px solid;
+}
