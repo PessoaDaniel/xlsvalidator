@@ -13,9 +13,5 @@ export const routes: Routes = [
   {
     path: 'upload',
     loadChildren: () => import('./upload/upload.module').then(m => m.UploadModule)
-  },
-  {
-    path: 'results',
-    loadChildren: () => import('./results/results.module').then(m => m.ResultsModule)
   }
 ];
