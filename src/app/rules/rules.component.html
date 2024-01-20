@@ -1,1 +1,33 @@
-<p>rules works!</p>
+<div id="rules-content">
+  <div class="add-rule-content" *ngIf="!rules.length" (click)="addRule()">
+    <div class="add-circle"><i class="fa-solid fa-circle-plus"></i></div>
+    <div>Adicionar Regra</div>
+  </div>
+  <div class="rules-container">
+      <div class="rule" *ngFor="let rule of rules">
+        <div class="rule-side rule-left">
+          <div class="form-row">
+            <section>
+              <label class="no-margin">Nome da coluna</label>
+              <input class="input"  type="text" placeholder="CHAVE">
+            </section>
+            <section>
+              <label>Coluna obrigatória</label>
+              <div>
+                <label>Sim</label>
+                <input type="radio" name="required">
+                <label>Não</label>
+                <input type="radio" name="required">
+              </div>
+            </section>
+          </div>
+          <div class="form-row center">
+              <a>Configurar máscara</a>
+          </div>
+        </div>
+      </div>
+  </div>
+  <div class="add-rule-line" *ngIf="rules.length" (click)="addRule()">
+    <div class="add-circle"><i class="fa-solid fa-circle-plus"></i></div>
+  </div>
+</div>

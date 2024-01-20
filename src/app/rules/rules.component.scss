@@ -1,0 +1,129 @@
+.add-rule-content {
+  display: flex;
+  height: 200px;
+  border: 5px dotted #084b28;
+  border-radius: 10px;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  color: #084b28;
+  text-align: center;
+  cursor: pointer;
+  }
+#rules-content {
+  box-sizing: border-box;
+  padding: 10px;
+}
+.add-circle {
+  font-size: 100px;
+}
+.add-rule-content:hover {
+    opacity: 0.5;
+}
+.add-rule-line {
+  .add-circle {
+    font-size: 40px;
+    color: #084b28;
+    cursor: pointer;
+  }
+}
+.add-rule-line {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-top: 10px;
+}
+.rules-container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rule {
+  width: 40%;
+  max-height: 200px;
+  border-left: 10px solid #108248;
+  margin-bottom: 10px;
+  border-radius: 7px;
+  background: #FFFFFF;
+  display: flex;
+  box-shadow: 0 2px 5px #000000;
+  box-sizing: border-box;
+  padding: 10px;
+   div {
+
+     box-sizing: border-box;
+   }
+}
+.rule-side {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.rule-divider {
+  width: 0;
+  background: #FFFFFF;
+  height: 100%;
+  border: 1px solid #cccccc;
+}
+
+.form-row {
+  margin: 4px 0;
+  display: flex;
+  section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 50%;
+    div {
+      height: 30px;
+      display: flex;
+      width: 100%;
+      justify-content: flex-start;
+
+      label {
+        margin: 8px 5px;
+        color: #000000;
+      }
+    }
+  }
+  label {
+    font-size: 12px;
+    color: #084b28;
+    font-weight: bolder;
+  }
+  input[type=text] {
+    height: 20px;
+    width: 90%;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    padding: 4px 2px;
+  }
+  input:active,
+  input:focus {
+    border: 2px solid #084b28;
+  }
+
+  input[type=radio] {
+    cursor: pointer;
+  }
+
+  .no-margin {
+    margin: 0 !important;
+  }
+  a {
+    color: #108248;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+}
+.form-row.center {
+  justify-content: center;
+}
+
+
