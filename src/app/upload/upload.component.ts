@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {RulesService} from "../shared/services/rules.service";
 
 @Component({
   selector: 'app-upload',
@@ -8,5 +9,14 @@ import { Component } from '@angular/core';
   styleUrl: './upload.component.scss'
 })
 export class UploadComponent {
+  rules: Array<any> = [];
 
+  constructor(private rulesService: RulesService) {}
+  ngOnInit() {
+    this.rulesService.rules.subscribe((rule) => {
+      if (rule) {
+        this.rules.push(rule);
+      }
+    });
+  }
 }
