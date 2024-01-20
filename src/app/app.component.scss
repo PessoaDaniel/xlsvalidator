@@ -50,6 +50,7 @@ nav {
   font-size: 20px;
   border-bottom: 2px solid #cccccc;
   cursor: pointer;
+  margin-bottom: 20px;
 }
 .nav-item {
   text-align: center;
@@ -69,4 +70,24 @@ nav {
 div[aria-disabled] {
   pointer-events: none;
   opacity: 0.3;
+}
+.actions {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  padding:0  20px;
+  box-sizing: border-box;
+  button {
+    background: transparent;
+    cursor: pointer;
+    border: none;
+    color: #FFFFFF;
+    font-size: 30px;
+  }
+}
+#content {
+  min-height: 100vh;
+}
+.nav-item.dark {
+  color: #FFFFFF;
 }
