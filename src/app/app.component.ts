@@ -21,11 +21,18 @@ export class AppComponent {
   readyResults: boolean|null = true;
   isDark: boolean|null = true;
 
-  constructor(private systemService: SystemService) {}
+  constructor(private systemService: SystemService,) {}
 
   ngOnInit() {
     this.systemService.isDarkMode.subscribe((isDark:boolean|null) => {
       this.isDark = isDark;
+    });
+    this.systemService.cantUpload.subscribe((cantUpload) => {
+      if (cantUpload) {
+        this.canUpload = cantUpload;
+      } else {
+        this.canUpload = null;
+      }
     });
   }
 

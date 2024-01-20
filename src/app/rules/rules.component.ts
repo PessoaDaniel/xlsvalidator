@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
+import {SystemService} from "../shared/services/system.service";
 
 @Component({
   selector: 'app-rules',
@@ -13,8 +14,9 @@ import {NgForOf, NgIf} from "@angular/common";
 })
 export class RulesComponent {
   rules: Array<Object> = [];
-
+  constructor(private systemService: SystemService) {}
   addRule() {
     this.rules.push({});
+    this.systemService.cantUpload.next(false);
   }
 }

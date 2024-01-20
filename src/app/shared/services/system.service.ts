@@ -9,4 +9,5 @@ export class SystemService {
   constructor() { }
 
   isDarkMode: BehaviorSubject<any> = new BehaviorSubject(false);
+  cantUpload: BehaviorSubject<any> = new BehaviorSubject(true);
 }
