@@ -15,5 +15,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'xlsvalidator';
+  title = 'XLS Validator';
+  canUpload: boolean|null = true;
+  readyResults: boolean|null = true;
 }

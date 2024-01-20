@@ -3,7 +3,7 @@ header {
   height: 250px;
   display: flex;
   align-items: center;
-  padding-top: 10%;
+  padding-top: 30px;
   flex-direction: column;
 
   section {
@@ -65,4 +65,8 @@ nav {
 .nav-item.active {
   color: #108248;
   border-bottom: 4px solid;
+}
+div[aria-disabled] {
+  pointer-events: none;
+  opacity: 0.3;
 }

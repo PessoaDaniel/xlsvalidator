@@ -16,8 +16,8 @@
   </section>
 </header>
 <nav>
-  <div class="nav-item" [routerLink]="['rules']" routerLinkActive="active"><i class="fa-solid fa-table-columns"></i> Colunas</div>
-  <div class="nav-item" routerLink="upload" routerLinkActive="active"><i class="fa-solid fa-cloud-arrow-up"></i> Upload</div>
-  <div class="nav-item" routerLink="results" routerLinkActive="active"><i class="fa-solid fa-list-check"></i> Resultado</div>
+  <div class="nav-item" [routerLink]="['rules']" routerLinkActive="active" ><i class="fa-solid fa-table-columns"></i> Colunas</div>
+  <div class="nav-item" routerLink="upload" routerLinkActive="active" [attr.aria-disabled]="canUpload"><i class="fa-solid fa-cloud-arrow-up"></i> Upload</div>
+  <div class="nav-item" routerLink="results" routerLinkActive="active" [attr.aria-disabled]="readyResults" ><i class="fa-solid fa-list-check"></i> Resultado</div>
 </nav>
 <router-outlet></router-outlet>
