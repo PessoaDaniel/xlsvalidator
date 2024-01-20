@@ -52,7 +52,6 @@
   box-sizing: border-box;
   padding: 10px;
    div {
-
      box-sizing: border-box;
    }
 }
@@ -141,5 +140,10 @@
      margin: 0 4px;
    }
 }
-
-
+.right {
+  justify-content: flex-end;
+}
+.close {
+  color: #084b28;
+  cursor: pointer;
+}

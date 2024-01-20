@@ -8,8 +8,11 @@
         <i class="fa-solid fa-circle-info"></i>
         As chaves de cada coluna deve estar na primeira linha do arquivo.
       </div>
-      <div class="rule" *ngFor="let rule of rules">
+      <div class="rule" *ngFor="let rule of rules; let  index = index">
         <div class="rule-side rule-left">
+          <div class="form-row right">
+            <i class="fa-solid fa-times close"></i>
+          </div>
           <div class="form-row">
             <section>
               <label class="no-margin">Nome da coluna</label>
@@ -19,9 +22,9 @@
               <label>Coluna obrigatória</label>
               <div>
                 <label>Sim</label>
-                <input type="radio" name="required">
+                <input type="radio" [name]="'required-' +index">
                 <label>Não</label>
-                <input type="radio" name="required">
+                <input type="radio" [name]="'required-' +index">
               </div>
             </section>
           </div>
