@@ -125,5 +125,21 @@
 .form-row.center {
   justify-content: center;
 }
+.alert {
+  width: 40%;
+  height: 40px;
+  background: #084b28;
+  margin-bottom: 8px;
+  border-radius: 4px;
+  text-align: center;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bolder;
+   * {
+     margin: 0 4px;
+   }
+}
 
 

@@ -4,6 +4,10 @@
     <div>Adicionar Regra</div>
   </div>
   <div class="rules-container">
+      <div class="alert" *ngIf="rules.length">
+        <i class="fa-solid fa-circle-info"></i>
+        As chaves de cada coluna deve estar na primeira linha do arquivo.
+      </div>
       <div class="rule" *ngFor="let rule of rules">
         <div class="rule-side rule-left">
           <div class="form-row">
@@ -27,7 +31,7 @@
         </div>
       </div>
   </div>
-  <div class="add-rule-line" *ngIf="rules.length" (click)="addRule()">
-    <div class="add-circle"><i class="fa-solid fa-circle-plus"></i></div>
+  <div class="add-rule-line" *ngIf="rules.length">
+    <div class="add-circle" (click)="addRule()"><i class="fa-solid fa-circle-plus"></i></div>
   </div>
 </div>
