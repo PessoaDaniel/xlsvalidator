@@ -21,8 +21,7 @@ export class AppComponent {
   readyResults: boolean|null = true;
   isDark: boolean|null = true;
 
-  constructor(private systemService: SystemService) {
-  }
+  constructor(private systemService: SystemService) {}
 
   ngOnInit() {
     this.systemService.isDarkMode.subscribe((isDark:boolean|null) => {
