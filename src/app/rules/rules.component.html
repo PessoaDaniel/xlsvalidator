@@ -16,7 +16,7 @@
           <div class="form-row">
             <section>
               <label class="no-margin">Nome da coluna</label>
-              <input class="input"  type="text" placeholder="CHAVE">
+              <input class="input"  type="text" placeholder="CHAVE" (input)="updateRuleKey($event, index)">
             </section>
             <section>
               <label>Coluna obrigatória</label>
@@ -24,11 +24,11 @@
                 <label>Sim</label>
                 <input type="radio" [name]="'required-' +index" [checked]="rule.required" (click)="updateStatus(index,true)">
                 <label>Não</label>
-                <input type="radio" [name]="'required-' +index" [checked]="!rule.required" (click)="updateStatus(index, false)">
+                <input type="radio" [name]="'required-' +index" [checked]="!rule.required && rule.required != undefined" (click)="updateStatus(index, false)">
               </div>
             </section>
           </div>
-          <div class="form-row center">
+          <div class="form-row center" *ngIf="!rule.hasMask">
               <a>Configurar máscara</a>
           </div>
         </div>

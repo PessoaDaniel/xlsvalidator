@@ -49,4 +49,10 @@ export class RulesService {
   setStore(stored: Rule[]) {
     window.localStorage.setItem('RULES', JSON.stringify(stored));
   }
+
+  updateKey (key: string, index:number) {
+    let stored:Rule[] = this.getStored();
+    stored[index].key = key;
+    this.setStore(stored);
+  }
 }

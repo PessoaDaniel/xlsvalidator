@@ -46,8 +46,13 @@ export class RulesComponent {
   }
 
   updateStatus(index: number, status: boolean) {
-    let rule = this.rules[index];
-    rule.required = status;
+    this.rules[index].required = status;
     this.rulesService.updateStatus(index, status);
   }
+
+  updateRuleKey($event: any, index: number){
+    this.rules[index].key = $event.target.value.toUpperCase();
+    this.rulesService.updateKey($event.target.value.toUpperCase(), index);
+  }
+
 }
