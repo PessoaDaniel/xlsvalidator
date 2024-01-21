@@ -55,4 +55,9 @@ export class RulesComponent {
     this.rulesService.updateKey($event.target.value.toUpperCase(), index);
   }
 
+  updateMaskStatus(index: number, status: boolean){
+    this.rules[index].hasMask = status;
+    this.rulesService.updateMaskStatus(index, status);
+
+  }
 }

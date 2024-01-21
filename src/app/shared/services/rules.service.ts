@@ -55,4 +55,10 @@ export class RulesService {
     stored[index].key = key;
     this.setStore(stored);
   }
+
+  updateMaskStatus(index:number, status: boolean) {
+    let stored = this.getStored();
+    stored[index].hasMask = status;
+    this.setStore(stored);
+  }
 }

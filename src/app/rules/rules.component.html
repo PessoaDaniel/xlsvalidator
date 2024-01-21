@@ -16,7 +16,7 @@
           <div class="form-row">
             <section>
               <label class="no-margin">Nome da coluna</label>
-              <input class="input"  type="text" placeholder="CHAVE" (input)="updateRuleKey($event, index)">
+              <input class="input"  type="text" placeholder="CHAVE" (input)="updateRuleKey($event, index)" [value]="rule.key || ''">
             </section>
             <section>
               <label>Coluna obrigatória</label>
@@ -29,7 +29,10 @@
             </section>
           </div>
           <div class="form-row center" *ngIf="!rule.hasMask">
-              <a>Configurar máscara</a>
+              <a (click)="updateMaskStatus(index, true)">Configurar máscara</a>
+          </div>
+          <div class="form-row right" *ngIf="rule.hasMask">
+              <i class="fa-solid fa-times  close" (click)="updateMaskStatus(index, false)"></i>
           </div>
         </div>
       </div>
