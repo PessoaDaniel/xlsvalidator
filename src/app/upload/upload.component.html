@@ -13,4 +13,7 @@
       <mat-icon matSuffix>cloud_upload</mat-icon>
     </mat-form-field>
   </form>
+  <div class="actions" *ngIf="form.valid">
+    <button type="button" (click)="readFile()">Iniciar análise</button>
+  </div>
 </div>

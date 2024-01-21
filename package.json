@@ -22,8 +22,10 @@
     "@angular/router": "^17.0.0",
     "@ngx-dropzone/cdk": "^17.2.0",
     "@ngx-dropzone/material": "^17.2.0",
+    "read-excel-file": "^5.7.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
+    "xlsx": "^0.18.5",
     "zone.js": "~0.14.2"
   },
   "devDependencies": {
