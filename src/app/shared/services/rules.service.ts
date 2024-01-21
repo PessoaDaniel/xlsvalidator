@@ -39,4 +39,14 @@ export class RulesService {
     stored.splice(index,1);
     window.localStorage.setItem('RULES', JSON.stringify(stored));
   }
+
+  updateStatus(index: number, status: boolean) {
+    let stored = this.getStored();
+    stored[index].required = status;
+    this.setStore(stored);
+  }
+
+  setStore(stored: Rule[]) {
+    window.localStorage.setItem('RULES', JSON.stringify(stored));
+  }
 }

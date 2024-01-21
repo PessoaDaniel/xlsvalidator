@@ -44,4 +44,10 @@ export class RulesComponent {
       this.systemService.cantUpload.next(true);
     }
   }
+
+  updateStatus(index: number, status: boolean) {
+    let rule = this.rules[index];
+    rule.required = status;
+    this.rulesService.updateStatus(index, status);
+  }
 }
