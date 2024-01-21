@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-
+import {UploadGuard} from "./shared/guards/upload.guard";
 export const routes: Routes = [
   {
     path: '',
@@ -12,6 +12,7 @@ export const routes: Routes = [
   },
   {
     path: 'upload',
+    canActivate: [UploadGuard],
     loadChildren: () => import('./upload/upload.module').then(m => m.UploadModule)
   }
 ];
