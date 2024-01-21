@@ -6,9 +6,12 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatIconModule} from '@angular/material/icon';
 import {FormBuilder, FormGroup, ReactiveFormsModule, ValidatorFn} from "@angular/forms";
 import {MatChipRow} from "@angular/material/chips";
-import {NgIf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import readXlsxFile, {Row} from 'read-excel-file'
 import {Rule} from "../../models/Rule";
+import {ValidationService} from "../shared/services/validation.service";
+import {SystemService} from "../shared/services/system.service";
+import {ValidationError} from "../../models/ValidationError";
 
 
 @Component({
@@ -21,13 +24,16 @@ import {Rule} from "../../models/Rule";
     MatIconModule,
     ReactiveFormsModule,
     MatChipRow,
-    NgIf
+    NgIf,
+    NgForOf
   ],
   templateUrl: './upload.component.html',
   styleUrl: './upload.component.scss'
 })
 export class UploadComponent {
   rules: Array<Rule> = [];
+  validationErrors: ValidationError[]|null = null;
+  finishedValidation: boolean = false;
   form: FormGroup;
   sheetData:any;
   private fileInputValidators: ValidatorFn[] =  [
@@ -35,21 +41,45 @@ export class UploadComponent {
   ]
   constructor(
     private rulesService: RulesService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private systemService: SystemService,
+    private validationService: ValidationService
+    ) {
     this.form = this.formBuilder.group({
       uploadedFile: [null, this.fileInputValidators]
     });
   }
   ngOnInit() {
-    this.rulesService.rules.subscribe((rule: Rule) => {
-      if (rule) {
-        this.rules.push(rule);
-      }
-    });
+    this.rules = this.rulesService.getStored();
+    this.validationErrors = this.validationService.getStored();
+    if (this.validationErrors.length) {
+      this.finishedValidation = true;
+    }
+
+  }
+  ngAfterViewInit() {
+    if (this.rules.length) {
+      setTimeout(() =>this.systemService.cantUpload.next(false), 200);
+    }
   }
   clear() {}
   async readFile() {
     readXlsxFile(this.form.value.uploadedFile).then(
-      (sheetData: Row[]) => this.sheetData = sheetData);
+      (sheetData: Row[]) => {
+        this.sheetData = sheetData;
+        this.validationErrors = this.validationService.validateKeys(this.sheetData, this.rules);
+        this.finishedValidation = true;
+        if (this.validationErrors) {
+          this.validationService.store(this.validationErrors);
+        } else {
+          this.validationService.store([]);
+        }
+      });
+  }
+  clearUpload() {
+    this.form.reset();
+    this.finishedValidation = false;
+    this.validationErrors = [];
+    this.validationService.store([]);
   }
 }

@@ -1,5 +1,30 @@
 <div class="upload-content">
-  <form [formGroup]="form" >
+  <div class="results-container">
+    <div class="success" *ngIf="finishedValidation && !validationErrors?.length">
+      <div class="icon-container">
+        <i class="fa-regular fa-circle-check"></i>
+      </div>
+      Ufa! Seu arquivo é válido.
+    </div>
+    <p class="error-count" *ngIf="validationErrors && validationErrors.length == 1">Foi encontrado {{validationErrors?.length}} erro em seu arquivo.</p>
+    <p class="error-count" *ngIf="validationErrors && validationErrors.length > 1">Foram encontrados {{validationErrors?.length}} erros em seu arquivo.</p>
+    <div class="legend" *ngIf="validationErrors && validationErrors.length > 1">
+      <div>
+        <span class="warning legend-item"></span> Alerta
+      </div>
+      <div>
+        <span class="error legend-item"></span> Erro crítico
+      </div>
+    </div>
+    <div class="error-message" [class]="error.type" *ngFor="let error of validationErrors">
+      <i class="fa-solid fa-circle-exclamation"></i>
+      <div class="field">
+        <div>{{error.message}}</div>
+        <strong *ngIf="error.field">Campo: </strong> {{error.field}}
+      </div>
+    </div>
+  </div>
+  <form [formGroup]="form" *ngIf="!finishedValidation">
     <mat-form-field appearance="outline">
       <mat-label>Clique ou arraste arquivos para fazer o upload</mat-label>
       <ngx-mat-dropzone>
@@ -13,7 +38,8 @@
       <mat-icon matSuffix>cloud_upload</mat-icon>
     </mat-form-field>
   </form>
-  <div class="actions" *ngIf="form.valid">
-    <button type="button" (click)="readFile()">Iniciar análise</button>
+  <div class="actions">
+    <button type="button" (click)="readFile()" *ngIf="form.valid && !finishedValidation">Iniciar análise</button>
+    <button type="button" (click)="clearUpload()" *ngIf="finishedValidation">Carregar novo arquivo</button>
   </div>
 </div>
