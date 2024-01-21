@@ -7,8 +7,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {FormBuilder, FormGroup, ReactiveFormsModule, ValidatorFn} from "@angular/forms";
 import {MatChipRow} from "@angular/material/chips";
 import {NgIf} from "@angular/common";
-import * as XLSX from 'xlsx';
 import readXlsxFile, {Row} from 'read-excel-file'
+import {Rule} from "../../models/Rule";
 
 
 @Component({
@@ -27,7 +27,7 @@ import readXlsxFile, {Row} from 'read-excel-file'
   styleUrl: './upload.component.scss'
 })
 export class UploadComponent {
-  rules: Array<any> = [];
+  rules: Array<Rule> = [];
   form: FormGroup;
   sheetData:any;
   private fileInputValidators: ValidatorFn[] =  [
@@ -41,7 +41,7 @@ export class UploadComponent {
     });
   }
   ngOnInit() {
-    this.rulesService.rules.subscribe((rule) => {
+    this.rulesService.rules.subscribe((rule: Rule) => {
       if (rule) {
         this.rules.push(rule);
       }
