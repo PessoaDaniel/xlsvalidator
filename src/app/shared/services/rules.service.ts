@@ -34,4 +34,9 @@ export class RulesService {
     }
   }
 
+  removeStored(index:number){
+    let stored: Array<Rule> = this.getStored();
+    stored.splice(index,1);
+    window.localStorage.setItem('RULES', JSON.stringify(stored));
+  }
 }

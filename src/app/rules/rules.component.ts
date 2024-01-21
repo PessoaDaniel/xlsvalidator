@@ -37,4 +37,11 @@ export class RulesComponent {
     this.rulesService.store(rule);
   }
 
+  removeRule(index: number) {
+    this.rules.splice(index, 1);
+    this.rulesService.removeStored(index);
+    if (!this.rules.length) {
+      this.systemService.cantUpload.next(true);
+    }
+  }
 }
