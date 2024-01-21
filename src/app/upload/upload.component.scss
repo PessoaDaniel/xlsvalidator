@@ -1,3 +1,7 @@
+form {
+  display: flex;
+  width: 100%;
+}
 .upload-content {
   display: flex;
   width: 100%;
@@ -6,4 +10,8 @@
 }
 mat-form-field {
   width: 100%;
+}
+
+.mat-icon svg {
+  fill: #084b28;
 }

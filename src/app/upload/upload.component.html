@@ -1,9 +1,16 @@
 <div class="upload-content">
-  <mat-form-field appearance="outline">
-    <mat-label>Clique ou arraste arquivos para fazer o upload</mat-label>
-    <ngx-mat-dropzone>
-      <input type="file" fileInput [accept]="accept" />
-    </ngx-mat-dropzone>
-    <mat-icon matSuffix color="primary">cloud_upload</mat-icon>
-  </mat-form-field>
+  <form [formGroup]="form" >
+    <mat-form-field appearance="outline">
+      <mat-label>Clique ou arraste arquivos para fazer o upload</mat-label>
+      <ngx-mat-dropzone>
+        <input type="file" fileInput formControlName="uploadedFile"/>
+        @if (form.controls['uploadedFile'].value) {
+          <mat-chip-row (removed)="clear()">
+            {{ form.controls['uploadedFile'].value.name}}
+          </mat-chip-row>
+        }
+      </ngx-mat-dropzone>
+      <mat-icon matSuffix>cloud_upload</mat-icon>
+    </mat-form-field>
+  </form>
 </div>
