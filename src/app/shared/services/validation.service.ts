@@ -53,25 +53,64 @@ export class ValidationService {
     }
   }
 
-  validateEmptyData(fileData: Array<any>) {
+  validateEmptyData(fileData: Array<any>, rules: Rule[]) {
+    const preparedData:Array<any> = this.prepareColumns(fileData);
+    const requires = this.getRequires(rules);
     let validationErrors:Array<ValidationError> = [];
     fileData.splice(0, 1);
-    let rowCount: number = 1;
-    for (const row of fileData) {
-      rowCount = rowCount + 1;
-      let cellCount: number = 0;
-      for (const cell of row) {
-        cellCount = cellCount + 1;
-        if (!cell || cell == '') {
-          let error = new ValidationError(`Valor em branco detectado na linha ${rowCount} coluna ${cellCount}`);
-          validationErrors.push(error);
+    let colCount: number = 1;
+    for (let col of preparedData) {
+      if (col) {
+        let cellCount =  1;
+        for (let cell of col) {
+          if (!cell || cell == '') {
+            let error = new ValidationError(`Célula vazia na linha ${cellCount + 1} coluna ${colCount}`);
+            if (requires.includes(colCount)) {
+              error.type = 'error';
+            }
+            validationErrors.push(error);
+          }
+          cellCount = cellCount +1;
         }
+        colCount = colCount + 1;
       }
+
     }
 
     if (validationErrors.length) {
       return validationErrors;
     }
     return null;
+  }
+
+  prepareColumns(sheetData: Array<any>) {
+    let cols:Array<any> = [];
+    const keys = sheetData[0];
+    for (const key in keys) {
+        cols[Number.parseInt(key) + 1] = [];
+    }
+    sheetData.splice(0, 1);
+
+    for(const col in cols) {
+      for( const row of sheetData) {
+        let cellCount: number = 1;
+        for (const cell of row) {
+          if (Number.parseInt(col) == cellCount) {
+            cols[Number.parseInt(col)].push(cell)
+          }
+          cellCount = cellCount + 1;
+        }
+      }
+    }
+    return cols;
+  }
+  getRequires (rules: Rule[]) {
+    let requires:Array<any> = [];
+    for (const rule of rules) {
+      if (rule.required) {
+        requires.push(rules.indexOf(rule) + 1);
+      }
+    }
+    return requires;
   }
 }
