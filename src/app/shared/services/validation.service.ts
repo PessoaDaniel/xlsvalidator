@@ -55,7 +55,6 @@ export class ValidationService {
 
   validateEmptyData(fileData: Array<any>) {
     let validationErrors:Array<ValidationError> = [];
-
     fileData.splice(0, 1);
     let rowCount: number = 1;
     for (const row of fileData) {
