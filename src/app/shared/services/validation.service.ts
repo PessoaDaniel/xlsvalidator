@@ -8,14 +8,13 @@ import {ValidationError} from "../../../models/ValidationError";
 export class ValidationService {
   constructor() { }
 
-  validateKeys(fileData: Array<any>, rules: Rule[]) {
+  validateKeys(fileData: Array<any>, rules: Rule[]):ValidationError[]|null {
     let fileKeys = fileData[0];
     let validationErrors:Array<ValidationError> = [];
     let count = 0;
     for (const fileKey of fileKeys) {
       count = count + 1;
-      console.log(fileKey);
-      if (!fileKey || fileKey == '' || Number.isNaN(fileKey)) {
+      if (!fileKey || fileKey == '') {
         let error = new ValidationError(`Chave vazia detectada na linha 1 coluna ${count}`);
         error.type = 'error';
         validationErrors.push(error);
@@ -52,5 +51,28 @@ export class ValidationService {
     } else {
       return  [];
     }
+  }
+
+  validateEmptyData(fileData: Array<any>) {
+    let validationErrors:Array<ValidationError> = [];
+
+    fileData.splice(0, 1);
+    let rowCount: number = 1;
+    for (const row of fileData) {
+      rowCount = rowCount + 1;
+      let cellCount: number = 0;
+      for (const cell of row) {
+        cellCount = cellCount + 1;
+        if (!cell || cell == '') {
+          let error = new ValidationError(`Valor em branco detectado na linha ${rowCount} coluna ${cellCount}`);
+          validationErrors.push(error);
+        }
+      }
+    }
+
+    if (validationErrors.length) {
+      return validationErrors;
+    }
+    return null;
   }
 }

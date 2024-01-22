@@ -67,7 +67,19 @@ export class UploadComponent {
     readXlsxFile(this.form.value.uploadedFile).then(
       (sheetData: Row[]) => {
         this.sheetData = sheetData;
-        this.validationErrors = this.validationService.validateKeys(this.sheetData, this.rules);
+        let keysValidation = this.validationService.validateKeys(this.sheetData, this.rules);
+        let emptyDataValidation =  this.validationService.validateEmptyData(this.sheetData);
+        if (this.validationErrors) {
+          if (keysValidation) {
+            keysValidation.forEach((error) => this.validationErrors?.push(error));
+
+          }
+          if (emptyDataValidation) {
+            emptyDataValidation.forEach(error => this.validationErrors?.push(error));
+
+          }
+        }
+        console.log(this.validationErrors);
         this.finishedValidation = true;
         if (this.validationErrors) {
           this.validationService.store(this.validationErrors);
