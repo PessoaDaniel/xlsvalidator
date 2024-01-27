@@ -1,32 +1,18 @@
 import {Component} from '@angular/core';
 import {RulesService} from "../shared/services/rules.service";
-import {DropzoneCdkModule, FileInputValidators} from "@ngx-dropzone/cdk";
-import {DropzoneMaterialModule} from "@ngx-dropzone/material";
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatIconModule} from '@angular/material/icon';
-import {FormBuilder, FormGroup, ReactiveFormsModule, ValidatorFn} from "@angular/forms";
-import {MatChipRow} from "@angular/material/chips";
-import {NgForOf, NgIf} from "@angular/common";
+import {FileInputValidators} from "@ngx-dropzone/cdk";
+import {FormBuilder, FormGroup,ValidatorFn} from "@angular/forms";
 import readXlsxFile, {Row} from 'read-excel-file'
 import {Rule} from "../../models/Rule";
 import {ValidationService} from "../shared/services/validation.service";
 import {SystemService} from "../shared/services/system.service";
 import {ValidationError} from "../../models/ValidationError";
-
+import {Router} from "@angular/router";
+import {ErrorService} from "../shared/services/error.service";
 
 @Component({
   selector: 'app-upload',
-  standalone: true,
-  imports: [
-    MatFormFieldModule,
-    DropzoneCdkModule,
-    DropzoneMaterialModule,
-    MatIconModule,
-    ReactiveFormsModule,
-    MatChipRow,
-    NgIf,
-    NgForOf
-  ],
+  standalone: false,
   templateUrl: './upload.component.html',
   styleUrl: './upload.component.scss'
 })
@@ -43,7 +29,9 @@ export class UploadComponent {
     private rulesService: RulesService,
     private formBuilder: FormBuilder,
     private systemService: SystemService,
-    private validationService: ValidationService
+    private validationService: ValidationService,
+    private router: Router,
+    private errorService: ErrorService
     ) {
     this.form = this.formBuilder.group({
       uploadedFile: [null, this.fileInputValidators]
@@ -59,7 +47,13 @@ export class UploadComponent {
   }
   ngAfterViewInit() {
     if (this.rules.length) {
-      setTimeout(() =>this.systemService.cantUpload.next(false), 200);
+      setTimeout(async () => {
+        if (!this.validateRules()) {
+         await this.router.navigate(["/"]);
+         await this.errorService.error('Suas configurações de coluna são inválidas');
+        }
+        this.systemService.cantUpload.next(false)
+      }, 200);
     }
   }
   clear() {}
@@ -92,5 +86,21 @@ export class UploadComponent {
     this.finishedValidation = false;
     this.validationErrors = [];
     this.validationService.store([]);
+  }
+  private validateRules ():boolean {
+    for (const rule of this.rules) {
+      const ruleKeys = Object.keys(rule);
+      console.log(ruleKeys);
+      if (!ruleKeys.length) {
+        return false;
+      }
+      if (!ruleKeys.includes('key')) {
+        return false;
+      }
+      if (!ruleKeys.includes('required')) {
+        return false;
+      }
+    }
+    return true;
   }
 }
